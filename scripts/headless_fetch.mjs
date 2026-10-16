@@ -116,6 +116,7 @@ async function main() {
   const resultUrlContains = args["result-url-contains"] || "";
   const resultText = args["result-text"] || "";
   const resultSelector = args["result-selector"] || "";
+  const resultMinCount = Number(args["result-min-count"] || 0);
   const chromePath = findChrome(args.chrome);
 
   if (!cookiesPath || !url || !outPath) {
@@ -229,7 +230,18 @@ async function main() {
               resultSelector,
             )}))`
           : "true"
-      }
+      },
+      resultCount: ${
+        resultSelector
+          ? `document.querySelectorAll(${JSON.stringify(resultSelector)}).length`
+          : "0"
+      },
+      resultTotal: (() => {
+        const match = (document.body ? document.body.innerText : "").match(
+          /([\d,]+)\s+results searching for/i,
+        );
+        return match ? Number(match[1].replace(/,/g, "")) : null;
+      })()
     })`;
     const evaluateSnapshot = async () => {
       const evaluated = await send("Runtime.evaluate", {
@@ -268,7 +280,10 @@ async function main() {
             (!resultUrlContains ||
               (item.href || "").includes(resultUrlContains)) &&
             (!resultSelector || item.hasResultSelector === true) &&
-            (!resultText || new RegExp(resultText, "i").test(item.text || "")),
+            (!resultText || new RegExp(resultText, "i").test(item.text || "")) &&
+            (!resultMinCount ||
+              item.resultCount >= resultMinCount ||
+              (item.resultTotal !== null && item.resultTotal < resultMinCount)),
     );
 
     if (searchTerm) {
@@ -311,7 +326,10 @@ async function main() {
           (!resultSelector || item.hasResultSelector === true) &&
           (!resultText ||
             new RegExp(resultText, "i").test(item.text || "") ||
-            (item.text || "").length > 4000),
+            (item.text || "").length > 4000) &&
+          (!resultMinCount ||
+            item.resultCount >= resultMinCount ||
+            (item.resultTotal !== null && item.resultTotal < resultMinCount)),
       );
     }
 
