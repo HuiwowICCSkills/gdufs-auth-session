@@ -1,0 +1,4 @@
+interface:
+  display_name: "广外统一认证会话"
+  short_description: "管理广外统一身份认证与图书馆 VPN 会话，供其它 skill 复用"
+  default_prompt: "使用 $gdufs-auth-session 登录并缓存广外图书馆 VPN 会话，然后让检索 skill 复用该会话。"

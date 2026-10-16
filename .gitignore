@@ -1,0 +1,13 @@
+__pycache__/
+*.pyc
+*.pyo
+venv/
+.venv/
+
+# Session state and credentials are bearer secrets - never commit them
+session.json
+session.json.lock
+cookies.json
+config.json
+browser_sources.json
+*.local.json
