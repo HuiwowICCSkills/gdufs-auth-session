@@ -1,4 +1,4 @@
-# gdufs-auth-session（私有）部署指引
+# gdufs-auth-session（公开）部署指引
 
 管理广东外语外贸大学统一身份认证与图书馆 `libvpn.gdufs.edu.cn` VPN 会话，把登录态缓存到用户目录，供 HeinOnlineSearcher 等检索 skill 复用。**本 skill 只负责认证、会话和通用无头浏览器取页/下载，不负责任何数据库的检索逻辑。**
 
@@ -18,7 +18,7 @@ git clone https://github.com/HuiwowICCSkills/gdufs-auth-session.git "$env:USERPR
 python -m pip install -r "$env:USERPROFILE\.codex\skills\gdufs-auth-session\requirements.txt"
 ```
 
-本仓库是私有仓库：需要 HuiwowICCSkills 组织成员权限，或配置有读权限的部署密钥/令牌。
+本仓库是公开仓库：需要 HuiwowICCSkills 组织成员权限，或配置有读权限的部署密钥/令牌。
 
 ## 配置凭据
 
