@@ -14,11 +14,11 @@
 ## 安装
 
 ```powershell
-git clone https://github.com/GDUFSICCSkills/gdufs-auth-session.git "$env:USERPROFILE\.codex\skills\gdufs-auth-session"
+git clone https://github.com/HuiwowICCSkills/gdufs-auth-session.git "$env:USERPROFILE\.codex\skills\gdufs-auth-session"
 python -m pip install -r "$env:USERPROFILE\.codex\skills\gdufs-auth-session\requirements.txt"
 ```
 
-本仓库是私有仓库：需要 GDUFSICCSkills 组织成员权限，或配置有读权限的部署密钥/令牌。
+本仓库是私有仓库：需要 HuiwowICCSkills 组织成员权限，或配置有读权限的部署密钥/令牌。
 
 ## 配置凭据
 
